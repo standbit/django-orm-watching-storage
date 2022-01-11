@@ -1,4 +1,3 @@
-import datetime
 from django.db import models
 from django.utils.timezone import localtime
 
@@ -25,7 +24,7 @@ class Visit(models.Model):
         return '{user} entered at {entered} {leaved}'.format(
             user=self.passcard.owner_name,
             entered=self.entered_at,
-            leaved= 'leaved at ' + str(self.leaved_at) if self.leaved_at else 'not leaved'
+            leaved='leaved at ' + str(self.leaved_at) if self.leaved_at else 'not leaved' # Noqa E501
         )
 
 
@@ -38,13 +37,6 @@ def get_unfinished_visits():
     return unfinished_visits
 
 
-def get_duration(visit):
-    now = localtime().replace(microsecond=0)
-    entered_time = localtime(visit.entered_at)
-    delta = now - entered_time
-    return delta
-
-
 def format_duration(duration):
     seconds = int(duration.total_seconds())
     hours = seconds // 3600
@@ -53,13 +45,43 @@ def format_duration(duration):
     return f'{hours}:{minutes}:{secs}'
 
 
-def get_visit_description(visits):
-    visits_description = []
-    for lost_visit in visits:
+def get_storage_visit(visits):
+    storage_visits = []
+    for visit in visits:
         descript = {
-            'who_entered': lost_visit.passcard,
-            'entered_at': localtime(lost_visit.entered_at),
-            'duration': format_duration(get_duration(lost_visit)),
+            'who_entered': visit.passcard,
+            'entered_at': localtime(visit.entered_at),
+            'duration': format_duration(get_duration(visit)),
         }
-        visits_description.append(descript)
-    return visits_description
+        storage_visits.append(descript)
+    return storage_visits
+
+
+def get_passcard_visits_description(visits):
+    passcard_visits_description = []
+    for visit in visits:
+        descript = {
+            'entered_at': localtime(visit.entered_at),
+            'duration': format_duration(get_duration(visit)),
+            'is_strange': is_visit_long(visit),
+        }
+        passcard_visits_description.append(descript)
+    return passcard_visits_description
+
+
+def get_duration(visit):
+    now = localtime().replace(microsecond=0)
+    entered_time = localtime(visit.entered_at)
+    leaved_time = localtime(visit.leaved_at)
+    if not visit.leaved_at:
+        delta = now - entered_time
+    else:
+        delta = leaved_time - entered_time
+    return delta
+
+
+def is_visit_long(visit, minutes=60):
+    visit_time_in_min = (int(get_duration(visit).total_seconds()))/60
+    if visit_time_in_min > minutes:
+        return True
+    return False
