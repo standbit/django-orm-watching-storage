@@ -6,12 +6,14 @@
 ## Installing
 - Склонируйте репозиторий к себе
 - Cоздайте виртуальное окружение
+- Активируйте виртуальное окружение
 - Установите зависимости
 - Запустите скрипт
 
 
 ```python
 $ virtualenv venv
+$ source venv/bin/activate
 $ python -m pip install -r requirements.txt
 ```
 
