@@ -1,5 +1,5 @@
-from datacenter.models import get_storage_visit
-from datacenter.models import get_unfinished_visits
+from datacenter.overall_view import get_storage_visit
+from datacenter.overall_view import get_unfinished_visits
 from django.shortcuts import render
 
 

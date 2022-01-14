@@ -1,4 +1,4 @@
-from datacenter.models import get_passcard_visits_description
+from datacenter.overall_view import get_passcard_visits_description
 from datacenter.models import Passcard
 from datacenter.models import Visit
 from django.shortcuts import render
