@@ -22,6 +22,7 @@ def get_storage_visit(visits):
             'who_entered': visit.passcard,
             'entered_at': localtime(visit.entered_at),
             'duration': format_duration(get_duration(visit)),
+            'is_strange': is_visit_long(visit),
         }
         storage_visits.append(descript)
     return storage_visits
