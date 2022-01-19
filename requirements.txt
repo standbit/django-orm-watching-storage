@@ -5,3 +5,4 @@ psycopg2-binary==2.8.*
 pycodestyle==2.8.*
 pyflakes==2.4.*
 pytz==2017.*
+python-dotenv==0.19.*
