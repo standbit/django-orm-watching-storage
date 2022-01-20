@@ -21,8 +21,8 @@ $ python3 -m pip install -r requirements.txt
 ## Запуск скрипта
 1. Запустите скрипт, выполнив команду
 ```python
-$ python3 main.py
+$ python manage.py runserver 0.0.0.0:8000
 ```
-2. Перейдите на [localhost](http://127.0.0.1:8000/)
+2. Перейдите на [localhost](http://localhost:8000/)
 3. В открывшемся окне браузера можете работать
 4. Остановить выполнение программы в консоли: `Ctrl+C`
