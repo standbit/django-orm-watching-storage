@@ -19,10 +19,10 @@ def get_storage_visit(visits):
     storage_visits = []
     for visit in visits:
         descript = {
-            'who_entered': visit.passcard,
-            'entered_at': localtime(visit.entered_at),
-            'duration': format_duration(get_duration(visit)),
-            'is_strange': is_visit_long(visit),
+            "who_entered": visit.passcard,
+            "entered_at": localtime(visit.entered_at),
+            "duration": format_duration(get_duration(visit)),
+            "is_strange": is_visit_long(visit),
         }
         storage_visits.append(descript)
     return storage_visits
@@ -32,9 +32,9 @@ def get_passcard_visits_description(visits):
     passcard_visits_description = []
     for visit in visits:
         descript = {
-            'entered_at': localtime(visit.entered_at),
-            'duration': format_duration(get_duration(visit)),
-            'is_strange': is_visit_long(visit),
+            "entered_at": localtime(visit.entered_at),
+            "duration": format_duration(get_duration(visit)),
+            "is_strange": is_visit_long(visit),
         }
         passcard_visits_description.append(descript)
     return passcard_visits_description
